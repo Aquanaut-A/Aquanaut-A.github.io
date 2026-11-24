@@ -204,3 +204,12 @@ img { max-width: 100%; display: block; }
 /* 세로(휴대폰) 스크린샷 묶음: 작게 나란히 */
 .shots.portrait-set { grid-template-columns: repeat(auto-fill, minmax(130px, 180px)); justify-content: start; }
 .shots.portrait-set img { max-height: none; aspect-ratio: 9 / 16; object-fit: cover; }
+
+/* 닫기 버튼: 사진과 겹치지 않게 별도 줄 확보 */
+.modal-close {
+  top: 16px; right: 16px; width: 40px; height: 40px;
+  font-size: 1.1rem; display: grid; place-items: center; z-index: 3;
+}
+.modal-close:hover { background: var(--headline); color: var(--background); }
+#modalBody { padding-top: 52px; }
+#modalBody > .modal-thumb { margin-top: 0; }
