@@ -200,3 +200,7 @@ img { max-width: 100%; display: block; }
 @media (prefers-reduced-motion: reduce) { .fab { transition: opacity 0.2s; } .modal.is-scrolling .fab { transform: none; } }
 .modal-thumb { aspect-ratio: 16 / 9; }
 .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* 세로(휴대폰) 스크린샷 묶음: 작게 나란히 */
+.shots.portrait-set { grid-template-columns: repeat(auto-fill, minmax(130px, 180px)); justify-content: start; }
+.shots.portrait-set img { max-height: none; aspect-ratio: 9 / 16; object-fit: cover; }

@@ -151,9 +151,22 @@
       ${linksHtml(pr.links) ? `<div class="modal-links">${linksHtml(pr.links)}</div>` : ""}
       ${sections}
       ${fabHtml(pr.links)}`;
+    markPortraitShots();
     modal.classList.remove("is-scrolling");
     modal.showModal();
     modal.scrollTop = 0;
+  }
+
+  // 세로 스크린샷만 있는 묶음은 작은 썸네일로 나란히 배치
+  function markPortraitShots() {
+    $("modalBody").querySelectorAll(".shots").forEach((shots) => {
+      const imgs = [...shots.querySelectorAll("img")];
+      const update = () => {
+        if (!imgs.every((im) => im.naturalWidth)) return;
+        shots.classList.toggle("portrait-set", imgs.every((im) => im.naturalHeight > im.naturalWidth));
+      };
+      imgs.forEach((im) => (im.complete ? update() : im.addEventListener("load", update, { once: true })));
+    });
   }
 
   // 스크롤하는 동안은 FAB 를 숨기고, 멈추면 다시 보여줌
