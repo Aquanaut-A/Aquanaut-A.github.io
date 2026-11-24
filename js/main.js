@@ -169,14 +169,14 @@
     });
   }
 
-  // 스크롤하는 동안은 FAB 를 숨기고, 멈추면 다시 보여줌
+  // 스크롤하는 동안은 FAB 를 숨기고, 멈추고 3초 뒤 다시 보여줌
   let scrollTimer;
   modal.addEventListener(
     "scroll",
     () => {
       modal.classList.add("is-scrolling");
       clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(() => modal.classList.remove("is-scrolling"), 350);
+      scrollTimer = setTimeout(() => modal.classList.remove("is-scrolling"), 3000); // 멈춘 뒤 3초 후 표시
     },
     { passive: true }
   );
