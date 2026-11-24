@@ -119,6 +119,35 @@
 
   // ── Modal ────────────────────────────────────
   const modal = $("projectModal");
+
+  // 성과 숫자
+  const statsHtml = (stats = []) =>
+    stats.length
+      ? `<ul class="stats">${stats
+          .map((s) => `<li><strong>${esc(s.value)}</strong><span>${esc(s.label)}</span></li>`)
+          .join("")}</ul>`
+      : "";
+
+  // 문제 → 해결 → 결과
+  const casesHtml = (cases = []) =>
+    cases.length
+      ? `<section class="detail-section">
+          <h4>핵심 문제 해결</h4>
+          <div class="cases">${cases
+            .map(
+              (c, n) => `
+              <article class="case">
+                <p class="case-no mono">CASE ${String(n + 1).padStart(2, "0")}</p>
+                <dl>
+                  <div class="case-row problem"><dt>문제</dt><dd>${esc(c.problem)}</dd></div>
+                  <div class="case-row solution"><dt>해결</dt><dd>${esc(c.solution)}</dd></div>
+                  <div class="case-row result"><dt>결과</dt><dd>${esc(c.result)}</dd></div>
+                </dl>
+              </article>`
+            )
+            .join("")}</div>
+        </section>`
+      : "";
   function openProject(i) {
     const pr = data.projects[i];
     const sections = (pr.sections || [])
@@ -144,11 +173,14 @@
       <h3>${esc(pr.title)}</h3>
       ${pr.award ? `<p class="award">🏆 ${esc(pr.award)}</p>` : ""}
       <p class="modal-desc">${esc(pr.description || pr.summary)}</p>
+      ${statsHtml(pr.stats)}
       <dl class="facts">
         ${pr.roles ? `<div><dt>담당</dt><dd>${tags(pr.roles)}</dd></div>` : ""}
         ${pr.tech ? `<div><dt>사용 도구</dt><dd>${tags(pr.tech)}</dd></div>` : ""}
+        ${pr.docs ? `<div><dt>만든 문서</dt><dd>${tags(pr.docs)}</dd></div>` : ""}
       </dl>
       ${linksHtml(pr.links) ? `<div class="modal-links">${linksHtml(pr.links)}</div>` : ""}
+      ${casesHtml(pr.cases)}
       ${sections}
       ${fabHtml(pr.links)}`;
     markPortraitShots();

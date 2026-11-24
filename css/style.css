@@ -213,3 +213,34 @@ img { max-width: 100%; display: block; }
 .modal-close:hover { background: var(--headline); color: var(--background); }
 #modalBody { padding-top: 52px; }
 #modalBody > .modal-thumb { margin-top: 0; }
+
+/* ── 상세: 성과 숫자 ───────────────────────── */
+.stats {
+  list-style: none; margin: 20px 0 4px; padding: 0;
+  display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 640px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stats li {
+  border: 2px solid var(--stroke); border-radius: 12px; padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 2px; background: var(--main);
+}
+.stats strong { color: var(--headline); font-size: 1.5rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+.stats li:first-child strong { color: var(--highlight); }
+.stats span { font-size: 0.8rem; line-height: 1.4; }
+
+/* ── 상세: 문제 해결 사례 ───────────────────── */
+.cases { display: grid; gap: 14px; }
+@media (min-width: 760px) { .cases { grid-template-columns: repeat(3, 1fr); } }
+.case { border: 2px solid var(--stroke); border-radius: 12px; padding: 16px 18px; background: var(--main); }
+.case-no { margin: 0 0 10px; font-size: 0.75rem; color: var(--highlight); }
+.case dl { margin: 0; display: grid; gap: 10px; }
+.case-row dt {
+  display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 1px 8px;
+  border-radius: 999px; margin-bottom: 4px; color: var(--button-text);
+}
+.case-row dd { margin: 0; font-size: 0.88rem; line-height: 1.6; }
+.case-row.problem dt { background: var(--tertiary); }
+.case-row.solution dt { background: var(--highlight); }
+.case-row.result dt { background: var(--headline); }
+.case-row.result dd { color: var(--headline); font-weight: 600; }
+.facts dt { white-space: nowrap; }
