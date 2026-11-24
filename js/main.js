@@ -83,12 +83,19 @@
 
   const linksHtml = (links = {}) =>
     Object.entries(links)
-      .filter(([, url]) => url)
+      .filter(([k, url]) => url && k !== "demo") // demo 는 하단 FAB 로 따로 표시
       .map(
-        ([k, url], i) =>
-          `<a href="${esc(url)}" target="_blank" rel="noopener" class="btn btn-small${i === 0 ? " btn-primary" : ""}">${esc(LINK_LABEL[k] || k)} ↗</a>`
+        ([k, url]) =>
+          `<a href="${esc(url)}" target="_blank" rel="noopener" class="btn btn-small">${esc(LINK_LABEL[k] || k)} ↗</a>`
       )
       .join("");
+
+  // 상세 창 하단 중앙에 떠 있는 플레이하기 버튼
+  const fabHtml = (links = {}) =>
+    links.demo
+      ? `<div class="fab-wrap"><a class="fab" href="${esc(links.demo)}" target="_blank" rel="noopener">
+           <span class="fab-icon" aria-hidden="true">▶</span>${esc(LINK_LABEL.demo)}</a></div>`
+      : "";
 
   function renderProjects() {
     $("projectGrid").innerHTML = data.projects
@@ -141,11 +148,25 @@
         ${pr.roles ? `<div><dt>담당</dt><dd>${tags(pr.roles)}</dd></div>` : ""}
         ${pr.tech ? `<div><dt>사용 도구</dt><dd>${tags(pr.tech)}</dd></div>` : ""}
       </dl>
-      <div class="modal-links">${linksHtml(pr.links)}</div>
-      ${sections}`;
+      ${linksHtml(pr.links) ? `<div class="modal-links">${linksHtml(pr.links)}</div>` : ""}
+      ${sections}
+      ${fabHtml(pr.links)}`;
+    modal.classList.remove("is-scrolling");
     modal.showModal();
     modal.scrollTop = 0;
   }
+
+  // 스크롤하는 동안은 FAB 를 숨기고, 멈추면 다시 보여줌
+  let scrollTimer;
+  modal.addEventListener(
+    "scroll",
+    () => {
+      modal.classList.add("is-scrolling");
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => modal.classList.remove("is-scrolling"), 350);
+    },
+    { passive: true }
+  );
   $("projectGrid").addEventListener("click", (e) => {
     const card = e.target.closest(".card");
     if (card) openProject(card.dataset.index);
