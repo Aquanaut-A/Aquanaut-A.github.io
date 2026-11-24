@@ -20,7 +20,8 @@
   $("heroRole").textContent = p.role;
   // greeting 은 직접 작성하는 신뢰된 값이라 <br /> 등 HTML 허용
   $("heroTitle").innerHTML = p.greeting || `안녕하세요,<br />${esc(p.name)}입니다.`;
-  $("heroIntro").textContent = p.intro;
+  if (p.intro) $("heroIntro").textContent = p.intro;
+  else $("heroIntro").remove();
 
   const photo = p.photo
     ? `<img class="about-photo" src="${esc(p.photo)}" alt="${esc(p.name)} 프로필 사진" />`

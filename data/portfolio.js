@@ -9,8 +9,6 @@ window.PORTFOLIO = {
     name: "성승민",
     role: "Game Designer",
     greeting: "안녕하세요,<br />기획자 성승민입니다.",
-    intro:
-      "Notion · Asana로 기획과 일정을 관리하고, Godot · Codex로 직접 구현해 검증하며 재미를 설계합니다.",
     photo: "assets/images/profile.jpg",
     about: [
       "플레이어가 반복해서 하는 행동 하나하나가 다음 목표로 자연스럽게 이어지도록 만드는 데 관심이 많은 게임 기획자입니다. 코어 루프와 시스템을 설계할 때는 '이 행동이 왜 재미있는가'에서 출발해 보상과 성장 구조로 연결하는 것을 중요하게 생각합니다.",
