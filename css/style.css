@@ -219,7 +219,7 @@ img { max-width: 100%; display: block; }
   list-style: none; margin: 20px 0 4px; padding: 0;
   display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr);
 }
-@media (min-width: 640px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 640px) { .stats { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); } }
 .stats li {
   border: 2px solid var(--stroke); border-radius: 12px; padding: 14px 16px;
   display: flex; flex-direction: column; gap: 2px; background: var(--main);
