@@ -132,7 +132,20 @@ img { max-width: 100%; display: block; }
 .badge {
   position: absolute; left: 12px; top: 12px; padding: 4px 10px; border-radius: 999px;
   background: var(--tertiary); color: var(--button-text); font-size: 0.75rem; font-weight: 600;
+  overflow: hidden; isolation: isolate;
 }
+/* 수상 배지: 왼쪽에서 오른쪽으로 지나가는 반짝임 */
+.badge::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, var(--button-text) 50%, transparent 65%);
+  opacity: 0.6; transform: translateX(-100%);
+  animation: badge-shine 3s ease-in-out infinite;
+}
+@keyframes badge-shine {
+  0% { transform: translateX(-100%); }
+  40%, 100% { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) { .badge::after { animation: none; opacity: 0; } }
 .card-body { padding: 18px 20px 20px; }
 .card-meta { color: var(--paragraph); font-size: 0.78rem; margin: 0 0 4px; }
 .card h3 { margin: 0 0 6px; font-size: 1.15rem; }
